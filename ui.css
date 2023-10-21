@@ -1,8 +1,15 @@
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 /* 화면 전체를 감싸는 wrap */
 #wrap {
   width: 100%;
   height: 100%;
-  /* padding-right: 180px;  */
+  padding-right: 180px; 
   /* 오른쪽 위치한 헤더 영역만큼 내부 여백을 둔다 */
 }
 
@@ -16,6 +23,7 @@ header {
   background-image: url(./images/bg.jpg);
   width: 180px;
   height: 100%;
+  box-sizing: border-box;
   position: fixed;
   right: 0;
   top: 0;
@@ -76,9 +84,12 @@ header nav ul li:hover a {
 header nav ul li:hover:after {
   background: #ed3140;
 }
-/* 메뉴에 해당하는 컨텐츠가 활성화 되었을 때 
-그 메뉴는 계속 선택된 상태처럼 보여야 한다
-그 상태 헨들링을 on 클래스로 한다 */
+
+/* 
+  메뉴에 해당하는 컨텐츠가 활성화 되었을 때 
+  그 메뉴는 계속 선택된 상태처럼 보여야 한다
+  그 상태 헨들링을 on 클래스로 한다 
+*/
 header nav ul li.on a {
   color: #ed3140;
 }
@@ -86,11 +97,170 @@ header nav ul li.on:after {
   background: #ed3140;
 }
 
-
-
 /* 컨텐츠 영역 */
 #container {
   background-color: aquamarine;
   width: 100%;
   height: 100%;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto; /* 가운데 정렬 */
+}
+#container .content {
+  width: 25%;
+  height: 100%;
+  position: absolute;
+}
+
+/* 디자인적인 요소의 경우 html에 불필요하게 늘리지 말고 CSS 가상 요소 선택자로 처리 가능한 부분은 처리할 것 */
+#container .content:before,
+#container .content:after {
+  content: "";
+  display: block;
+  position: absolute;
+}
+
+/* 가상 요소 선택자로 구분선 만들기 */
+#container .content:before {
+  width: 1px;
+  height: 100%;
+  background: #000;
+  left: 0;
+  top: 0;
+}
+
+/* 가상 요소로 각 menu의 id를 이용해서 개별 텍스트 넣기 
+공통 영역에 대한 스타일은 class 이용, 개별 텍스트는 id 이용*/
+#container .content:after {
+  left: 30px;
+  top: 180px;
+  font-size: 25px;
+  font-weight: 700;
+  color: #ed3140;
+}
+#container #menu1:after {
+  content: "회사소개";
+}
+#container #menu2:after {
+  content: "도서소개";
+}
+#container #menu3:after {
+  content: "FAQ";
+}
+#container #menu4:after {
+  content: "Contact us";
+}
+
+#container .content h2 {
+  opacity: 0;
+}
+
+/* 각 메뉴에 보여줄 이미지들 가상 요소 선택자로 생성 */
+#container .content .combox:before {
+  content: "";
+  display: block;
+  position: absolute;
+}
+/* 
+  23.10.22
+  추후 배경 이미지랑 이미지 크기 재조정하기
+  이미지 확정하면 right, top 으로 위치 재조정 필요
+*/
+#container #menu1 .content .combox:before {
+  /* 배경 이미지 넣기 */
+  background-image: url();
+  background-size: 100%; /* 가상 요소 크기와 동일한 크기 전체를 활용 */
+  /* 나중에 크기 사용하는 이미지에 적합하게 변경 */
+  width: 300px;
+  height: 300px;
+  right: 15px;
+  top: 15px;
+}
+
+/* 
+  23.10.22
+  추후 배경 이미지 넣기
+*/
+#container #menu1 {
+  /* 백그라운드 배경이미지 대신 임시로 색상 넣음 나중에 반복 패턴의 배경 이미지 넣기 */
+  background-color: aliceblue; 
+  left: 0%;
+}
+#container #menu2 {
+  /* 백그라운드 배경이미지 대신 임시로 색상 넣음 */
+  background-color: beige;
+  left: 25%;
+}
+#container #menu3 {
+  /* 백그라운드 배경이미지 대신 임시로 색상 넣음 */
+  background-color: thistle;
+  left: 50%;
+}
+#container #menu4 {
+  /* 백그라운드 배경이미지 대신 임시로 색상 넣음 */
+  background-color: rosybrown;
+  left: 75%;
+}
+
+
+
+/* FOOTER 영역 */
+footer {
+  width: 180px;
+  box-sizing: border-box;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  padding: 0px 20px 30px 20px;
+  font-size: 11px;
+  color: #7e7e7e;
+  z-index: 12;
+}
+footer address {
+  padding: 0px 0px 15px;
+}
+/* SNS */
+footer a {
+  position: absolute;
+  top: -31px;
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+/* 
+  23.10.22
+  추후 배경 이미지 넣기
+*/
+/* 현재 이미지가 안보여서 임지고 텍스트로 대체해두었음 */
+footer > a.face {
+  background: url(./images/facebook.png);
+  right: 18px;
+}
+footer > a.twit {
+  background: url(./images/twit.png);
+  right: 48px;
+}
+footer > a.instar {
+  background-image: url(./images/instar.png);
+  right: 80px;
+}
+/* 
+  23.10.22
+  추후 호버할 때 이미지 호버 스타일 적용할지 생각
+*/
+/* SNS hover 영역 */
+
+/* 
+  23.10.22
+  추후 삭제할 것
+*/
+/* test 용 */
+div.face {
+  background-image: url("./images/facebook.png");
+  background-color: red;
+  position: absolute;
+  top: 31px;
+  display: block;
+  width: 16px;
+  height: 16px;
 }
