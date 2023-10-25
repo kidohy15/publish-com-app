@@ -110,6 +110,30 @@ header nav ul li.on:after {
   width: 25%;
   height: 100%;
   position: absolute;
+  transition: .5s;
+}
+
+/* 메뉴 선택 시 현재 화면 this */
+#container .content.this {
+  width: 100%;
+  left: 0 !important;
+}
+/* 선택한 화면에 대해서 가상 요소들(텍스트, 이미지, 왼쪽 선)가 안보이게 처리 */
+#container .content.this:before, 
+#container .content.this:after, 
+#container .content.this .conbox:before {
+  opacity: 0;
+}
+
+/* 선택 이전 화면 prev */
+#container .content.prev {
+  width: 100%;
+  left: -100% !important; /* 왼쪽으로 밀어낸다 */
+}
+/* 선택 다음 화면 next */
+#container .content.next {
+  width: 100%;
+  left: 100% !important;
 }
 
 /* 디자인적인 요소의 경우 html에 불필요하게 늘리지 말고 CSS 가상 요소 선택자로 처리 가능한 부분은 처리할 것 */
