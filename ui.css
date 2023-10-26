@@ -36,6 +36,7 @@ header .logo_box {
   top: 75px;
   width: 100px;
   height: 100px;
+  cursor: pointer;
 }
 
 header .logo_box img {
@@ -177,6 +178,33 @@ header nav ul li.on:after {
 
 #container .content h2 {
   opacity: 0;
+  transition: .5s;
+}
+#container .content.this h2 {
+  height: auto;
+  padding: 30px 0 20px 50px;
+  color: #000;
+  position: relative;
+  background: #fff;
+  font-size: 28px;
+  font-weight: 400;
+  opacity: 1;  /* 투명하게 하여 안보이게 했던 요소를 보이게 한다 */
+}
+#container .content.this h2:after {
+  content: "";
+  width: 100%;
+  height: 8px;
+  background: #ed3140;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+#container .content .conbox .content_wrap {
+  opacity: 0;
+}
+#container .content.this .conbox .content_wrap {
+  padding: 30px 50px 50px;
+  opacity: 1;
 }
 
 /* 각 메뉴에 보여줄 이미지들 가상 요소 선택자로 생성 */
