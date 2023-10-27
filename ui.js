@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  // 페이지가 로딩되면 start 클래스를 부여한다
+  $("#container").addClass("start")
 
   // 메뉴 클릭 시 해당 페이지 영역 확장 효과 이벤트
   $("nav li").click(function () {

@@ -106,12 +106,29 @@ header nav ul li.on:after {
   position: relative;
   max-width: 1200px;
   margin: 0 auto; /* 가운데 정렬 */
+  transition: .8s; /* 메뉴 클릭 시 화면 전체 100%로 될 때 툭 하고 바뀌는 것을 자연스럽게 하기 위해 넣었음 */
 }
+/* .content에 애니메이션 효과 부여 */
 #container .content {
   width: 25%;
   height: 100%;
   position: absolute;
-  transition: .5s;
+  /* transition: .5s; */
+  top: -100%;
+  transition: .8s;
+}
+#container .content:nth-of-type(2) {
+  transition-delay: .3s;
+}
+#container .content:nth-of-type(3) {
+  transition-delay: .6s;
+}
+#container .content:nth-of-type(4) {
+  transition-delay: .9s;
+}
+/* 처음에는 4분할된 영역이 보이지 않게 */
+#container.start .content{
+  top: 0;
 }
 
 /* 메뉴 선택 시 현재 화면 this */
@@ -120,10 +137,25 @@ header nav ul li.on:after {
   left: 0 !important;
 }
 /* 선택한 화면에 대해서 가상 요소들(텍스트, 이미지, 왼쪽 선)가 안보이게 처리 */
+/* 다중 선택자로 prev, next 도 한세트 씩 추가해준다 */
 #container .content.this:before, 
 #container .content.this:after, 
-#container .content.this .conbox:before {
+#container .content.this .conbox:before, 
+#container .content.prev:before, 
+#container .content.prev:after, 
+#container .content.prev .conbox:before, 
+#container .content.next:before, 
+#container .content.next:after, 
+#container .content.next .conbox:before { 
   opacity: 0;
+  transition: .6s;
+  transition-delay: .3s;
+}
+#container .content.this .conbox:before {
+  transform: translate3d(300px, 0, 0);
+}
+#container .content.this:after {
+  transform: translate3d(-300px, 0, 0);
 }
 
 /* 선택 이전 화면 prev */
@@ -189,6 +221,8 @@ header nav ul li.on:after {
   font-size: 28px;
   font-weight: 400;
   opacity: 1;  /* 투명하게 하여 안보이게 했던 요소를 보이게 한다 */
+  transition: .6s;
+  transition-delay: 1.2s; /* 페이지가 전부 펼쳐지고 나서 상단 제목이 내려 올 수 있도록 딜레이를 다른 contents 딜레이 시간 이상으로 걸었다*/
 }
 #container .content.this h2:after {
   content: "";
@@ -207,8 +241,9 @@ header nav ul li.on:after {
   opacity: 1;
 }
 
+
 /* 각 메뉴에 보여줄 이미지들 가상 요소 선택자로 생성 */
-#container .content .combox:before {
+#container .content .conbox:before {
   content: "";
   display: block;
   position: absolute;
@@ -218,7 +253,7 @@ header nav ul li.on:after {
   추후 배경 이미지랑 이미지 크기 재조정하기
   이미지 확정하면 right, top 으로 위치 재조정 필요
 */
-#container #menu1 .content .combox:before {
+#container #menu1 .content .conbox:before {
   /* 배경 이미지 넣기 */
   background-image: url();
   background-size: 100%; /* 가상 요소 크기와 동일한 크기 전체를 활용 */
