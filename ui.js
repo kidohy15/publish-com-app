@@ -41,9 +41,28 @@ $(document).ready(function () {
   // 롤링 배너
   $(".roll_left").click(function () {
     $(".book_roll li").eq(0).insertAfter(".book_roll li:last-child");
-  })
+  });
   $(".roll_right").click(function () {
     // eq 에 들어가는 인덱스에서 -1은 가장 마지막 인덱스
     $(".book_roll li").eq(-1).insertBefore(".book_roll li:first-child");
+  });
+
+  // Ajax 로 배너와 상세 페이지 연결하여 동적 구성
+  $(".book_roll li").click(function () {
+    let _this = $(this)
+    console.log("현재 클릭 도서:", _this);
+    let liurl = _this.data("url")
+
+    // 새로운 내용이 들어갈 수 있게 기존 요소들을 제거해줌
+    $(".notebook").html(); 
+
+    $.ajax({
+      type: 'post',
+      url: liurl,
+      dataType: 'html',
+      success: function (data) {
+        $(".notebook").html(data);;
+      }
+    });
   })
 })
