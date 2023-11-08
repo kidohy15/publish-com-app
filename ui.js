@@ -54,15 +54,21 @@ $(document).ready(function () {
     let liurl = _this.data("url")
 
     // 새로운 내용이 들어갈 수 있게 기존 요소들을 제거해줌
-    $(".notebook").html(); 
+    $(".notebook").html();
 
     $.ajax({
       type: 'post',
-      url: liurl,
+      url: 'books/' + liurl,
       dataType: 'html',
       success: function (data) {
         $(".notebook").html(data);;
       }
     });
+  });
+
+  // FAQ 화면 아코디언 형태의 목록 열고 닫기
+  $(".acordio_box ol li").click(function () {
+    $(".acordio_box ol li").removeClass("on");
+    $(this).addClass("on");
   })
 })
