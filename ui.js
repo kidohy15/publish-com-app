@@ -68,7 +68,17 @@ $(document).ready(function () {
 
   // FAQ 화면 아코디언 형태의 목록 열고 닫기
   $(".acordio_box ol li").click(function () {
+    if ($(this).hasClass("on")) {
+      $(".acordio_box ol li").removeClass("on");
+      return;
+    }
+
     $(".acordio_box ol li").removeClass("on");
     $(this).addClass("on");
   })
+
+  // Contact us 전송 후 팝업창 확인
+  $(".close").click(function () {
+    $(".thankyou_message").css("display", "none");
+  });
 })
